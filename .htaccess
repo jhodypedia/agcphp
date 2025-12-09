@@ -1,0 +1,19 @@
+RewriteEngine On
+
+# Jika URL bukan ke /public, arahkan ke /public
+RewriteCond %{REQUEST_URI} !^/public/
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ /public/$1 [L]
+
+# Blok akses langsung ke config.php
+<Files "config.php">
+  Order allow,deny
+  Deny from all
+</Files>
+
+# Blok akses langsung ke functions.php
+<Files "functions.php">
+  Order allow,deny
+  Deny from all
+</Files>
