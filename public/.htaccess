@@ -1,0 +1,31 @@
+RewriteEngine On
+
+# Serve existing files / folders directly
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+# Auth
+RewriteRule ^login/?$ auth/login.php [L,QSA]
+RewriteRule ^register/?$ auth/register.php [L,QSA]
+RewriteRule ^logout/?$ auth/logout.php [L,QSA]
+
+# Admin
+RewriteRule ^admin/?$ admin/index.php [L,QSA]
+RewriteRule ^admin/sites/?$ admin/sites.php [L,QSA]
+RewriteRule ^admin/billing/?$ admin/billing.php [L,QSA]
+RewriteRule ^admin/payments/?$ admin/payments.php [L,QSA]
+RewriteRule ^admin/orders/?$ admin/orders.php [L,QSA]
+RewriteRule ^admin/users/?$ admin/users.php [L,QSA]
+RewriteRule ^admin/global-settings/?$ admin/global-settings.php [L,QSA]
+RewriteRule ^admin/activity/?$ admin/activity.php [L,QSA]
+
+# Front
+RewriteRule ^$ index.php [L]
+RewriteRule ^movie/([^/]+)/?$ movie.php?slug=$1 [L,QSA]
+RewriteRule ^search/?$ search.php [L,QSA]
+RewriteRule ^sitemap\.xml$ sitemap.php [L]
+RewriteRule ^robots\.txt$ robots.php [L]
+
+# Fallback 404
+RewriteRule . 404.php [L]
